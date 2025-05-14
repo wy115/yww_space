@@ -82,7 +82,7 @@
                         </a>
                         <a
                           v-if="item.demo !== 'null'"
-                          :href="item.demo"
+                          @click="jump(item.demo)"
                           target="_blank"
                           rel="noreferrer"
                           title="查看"
@@ -120,17 +120,18 @@
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
-
+import { useRouter } from "vue-router";
+const router = useRouter();
 const items = ref([
   {
     id: 1,
-    name: "Personal Website",
+    name: "3D地球",
     imageUrl:
       "https://panshi-on.oss-cn-hangzhou.aliyuncs.com/yunxiaoding-mini/other/common/MJDHNODO-1711590377666Pasted Graphic 1.png",
     status: "个人简介站.",
-    tech: "VueJS 3, Tailwind",
+    tech: "three.js",
     github: "null",
-    demo: "http://mywebsite.ssdwgg.cn/",
+    demo: "/three/smartCity",
   },
   {
     id: 9,
@@ -236,6 +237,9 @@ const items = ref([
     demo: "null",
   },
 ]);
+const jump = (demo: string) => {
+  router.push(demo);
+};
 </script>
 <style scoped>
 .item-card:hover {

@@ -33,7 +33,7 @@ import { useEventBus } from "@vueuse/core";
 import { ElMessage } from "element-plus";
 import { ClickOutside as vClickOutside } from "element-plus";
 import SmallBall from "./small-ball.vue";
-import { createStorage } from "@/utils/storage";
+// import { createStorage } from "@/utils/storage";
 import { useRouter } from "vue-router";
 const router = useRouter();
 const visible = ref(false);
@@ -57,7 +57,7 @@ const toolOptions = [
 ];
 const onClick = async (val: string) => {
   const driverBus = useEventBus<string>("driver");
-  const session = createStorage();
+  // const session = createStorage();
   switch (val) {
     case "back":
       driverBus.emit();

@@ -4,11 +4,14 @@
     <LxBg />
     <BzdBg />
     <Menu />
-
   </template>
-  <div class="max-w-7xl mx-auto flex flex-col relative">
-    <div class="md:mt-[100px]">
-          <EditiorToolBox />
+  <div
+    :class="{
+      'max-w-7xl mx-auto flex flex-col relative': shouldShowComponents,
+    }"
+  >
+    <div>
+      <EditiorToolBox />
       <router-view></router-view>
     </div>
   </div>
@@ -36,11 +39,9 @@ import LxBg from "@/layout/background/LxBg/LxBg.vue";
 import BzdBg from "@/layout/background/BzdBg.vue";
 import Menu from "@/layout/menu/index.vue";
 import EditiorToolBox from "@/layout/editior-toolbox/index.vue";
-import { onMounted, computed } from "vue";
+import { computed } from "vue";
 const route = useRoute();
 const shouldShowComponents = computed(() => route.path === "/");
-
-
 </script>
 
 <style scoped></style>
