@@ -1,57 +1,66 @@
-// @see https://eslint.bootcss.com/docs/rules/
-module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-    node: true,
-    jest: true,
-  },
-  /* 指定如何解析语法 */
-  parser: 'vue-eslint-parser',
-  /* 优先级低于 parse 的语法解析配置 */
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    parser: '@typescript-eslint/parser',
-    jsxPragma: 'React',
-    ecmaFeatures: {
-      jsx: true,
+// 引入 ESLint 官方推荐规则（@eslint/js 是 ESLint v9 官方推荐方式）
+import eslintRecommended from '@eslint/js';
+// 引入插件（注意：插件本身需要已安装到 node_modules 中）
+import tseslint from '@typescript-eslint/eslint-plugin';
+import vuePlugin from 'eslint-plugin-vue';
+import vueParser from 'vue-eslint-parser'; // ✅ 加上这个！
+
+export default [
+  // 继承 ESLint 官方推荐规则
+  eslintRecommended.configs.recommended,
+
+  {
+    // 忽略某些路径，替代 .eslintignore 文件
+    ignores: ['dist/', 'node_modules/'],
+
+    // 设置语言选项
+    languageOptions: {
+      ecmaVersion: 'latest', // 支持最新 ECMAScript 语法
+      sourceType: 'module',  // 使用 ES module 模式
+      parser: 'vue-eslint-parser', // 使用 Vue 专用解析器（配合下面 options）
+      parserOptions: {
+        parser: '@typescript-eslint/parser', // 实际语法由 TS 解析器处理
+        jsxPragma: 'React', // 支持 JSX（虽然 Vue 里一般不用）
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
+
+    // 启用的插件
+    plugins: {
+      vue: vuePlugin,
+      '@typescript-eslint': tseslint,
+    },
+
+    // 报告未使用的 eslint-disable 注释
+    linterOptions: {
+      reportUnusedDisableDirectives: true,
+    },
+
+    // 自定义规则
+    rules: {
+      // 👉 JavaScript 原生规则
+      'no-var': 'error', // 禁止使用 var
+      'no-multiple-empty-lines': ['warn', { max: 1 }], // 限制连续空行数
+      'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 生产环境禁止 console
+      'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 生产环境禁止 debugger
+      'no-unexpected-multiline': 'error', // 禁止多行表达式意外换行
+      'no-useless-escape': 'off', // 允许不必要的转义（有时正则会用到）
+
+      // 👉 TypeScript 规则
+      '@typescript-eslint/no-unused-vars': 'error', // 禁止定义未使用的变量
+      '@typescript-eslint/prefer-ts-expect-error': 'error', // 使用 @ts-expect-error 替代 @ts-ignore
+      '@typescript-eslint/no-explicit-any': 'off', // 允许使用 any（可按需打开）
+      '@typescript-eslint/no-non-null-assertion': 'off', // 允许非空断言（可按需打开）
+      '@typescript-eslint/no-namespace': 'off', // 允许使用 namespace
+      '@typescript-eslint/semi': 'off', // 不强制加分号
+
+      // 👉 Vue 相关规则
+      'vue/multi-word-component-names': 'off', // 允许单词组件名（比如 index.vue）
+      'vue/script-setup-uses-vars': 'error', // setup 中使用的变量必须使用
+      'vue/no-mutating-props': 'off', // 允许修改 props（按需关闭）
+      'vue/attribute-hyphenation': 'off', // 属性命名风格自由（不强制连字符）
     },
   },
-  /* 继承已有的规则 */
-  extends: [
-    'eslint:recommended',
-    'plugin:vue/vue3-essential',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-  ],
-  plugins: ['vue', '@typescript-eslint'],
-  /*
-   * "off" 或 0 ==> 关闭规则
-   * "warn" 或 1 ==> 打开的规则作为警告（不影响代码执行） 
-   * "error" 或 2 ==> 规则作为一个错误（代码不能执行，界面报错）
-   */
-  rules: {
-    // eslint(https://eslint.bootcss.com/docs/rules/)
-    'no-var': 'error', //要求使用let或const而不是var
-    'no-multiple-empty-lines': ['warn', { max: 1 }], //不允许多个空行
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-unexpected-multiline': 'error', //禁止空余的多行
-    'no-useless-escape': 'off', //禁止不必要的转义字符
-
-    // typeScript (https://typescript-eslint.io/rules) 
-    '@typescript-eslint/no-unused-vars': 'error', // 禁止定义未使用的变量
-    '@typescript-eslint/prefer-ts-expect-error': 'error', // 禁止使用 @ts-ignore
-    '@typescript-eslint/no-explicit-any': 'off', // 禁止使用any类型
-    '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/no-namespace': 'off', // 禁止使用自定义 TypeScript模块和命名空间。
-    '@typescript-eslint/semi': 'off',
-
-    // eslint-plugin-vue (https://eslint.vuejs.org/rules/)
-    'vue/multi-word-component-names': 'off', // 要求组件名称始终为"-"连接的单词
-    'vue/script-setup-uses-vars': 'error', // 防止<script setup>使用的变量<template>被标记为未使用
-    'vue/no-mutating-props': 'off', // 不允许组件prop的改变
-    'vue/attribute-hyphenation': 'off', // 对模板中的自定义组件强制执行属性命名样式
-  },
-}
+];

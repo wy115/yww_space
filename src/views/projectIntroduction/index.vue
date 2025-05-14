@@ -1,5 +1,5 @@
 <template>
-  <div class="project-introduction">
+  <div id="project-introduction">
     <div class="px-5 py-5 md:px-12 md:py-10 text-left text-amber-50 mx-3">
       <article data-page="about">
         <header>

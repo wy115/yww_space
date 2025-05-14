@@ -30,6 +30,7 @@ import { routesList } from "@/router/routesList";
 
 const scrollTo = (selector: string) => {
   console.log(selector);
+  
   const element = document.querySelector(selector);
   if (element) {
     element.scrollIntoView({ behavior: "smooth" });

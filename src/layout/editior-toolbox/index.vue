@@ -34,11 +34,13 @@ import { ElMessage } from "element-plus";
 import { ClickOutside as vClickOutside } from "element-plus";
 import SmallBall from "./small-ball.vue";
 import { createStorage } from "@/utils/storage";
+import { useRouter } from "vue-router";
+const router = useRouter();
 const visible = ref(false);
 const toolOptions = [
   {
-    label: "新手指引",
-    value: "driver",
+    label: "回到首页",
+    value: "back",
   },
   {
     label: "切换主题",
@@ -57,8 +59,9 @@ const onClick = async (val: string) => {
   const driverBus = useEventBus<string>("driver");
   const session = createStorage();
   switch (val) {
-    case "driver":
+    case "back":
       driverBus.emit();
+      router.push('/');
       visible.value = false;
       break;
     case "theme":

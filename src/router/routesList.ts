@@ -1,5 +1,6 @@
 import type { RouteRecordRaw } from "vue-router";
 import i18n from "@/locales/index.js";
+
 export const routesList: RouteRecordRaw[] = [
   {
     path: "/",
@@ -28,15 +29,17 @@ export const routesList: RouteRecordRaw[] = [
     meta: {
       title: i18n.global.t("项目介绍"),
       icon: "GoodsFilled",
+      id: "project-introduction",
     },
   },
-  {
-    path: "/three",
-    name: "Three",
-    component: () => import("@/views/projectIntroduction/index.vue"),
-    meta: {
-      title: i18n.global.t("项目介绍"),
-      icon: "GoodsFilled",
-    },
-  },
+
+  // {
+  //   path: "/three",
+  //   name: "Three",
+  //   component: () => import("@/views/projectIntroduction/index.vue"),
+  //   meta: {
+  //     title: i18n.global.t("项目介绍"),
+  //     icon: "GoodsFilled",
+  //   },
+  // },
 ];
