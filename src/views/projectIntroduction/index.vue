@@ -126,119 +126,18 @@ const items = ref([
   {
     id: 1,
     name: "3D地球",
-    imageUrl:
-      "https://panshi-on.oss-cn-hangzhou.aliyuncs.com/yunxiaoding-mini/other/common/MJDHNODO-1711590377666Pasted Graphic 1.png",
+    imageUrl: "/project/3D地球.png",
     status: "个人简介站.",
     tech: "three.js",
     github: "null",
     demo: "/three/smartCity",
   },
-  {
-    id: 9,
-    name: "WGG BLOG",
-    imageUrl:
-      "https://panshi-on.oss-cn-hangzhou.aliyuncs.com/yunxiaoding-mini/other/common/PHFKHGNC-1711595226918WGG BLOG.png",
-    status: "基于Dumi的文档框架，是WGG的前端知识总结博客库",
-    tech: "Dumi, Readme",
-    github: "https://github.com/SSDWGG/blog",
-    demo: "http://blog.ssdwgg.cn/",
-  },
-  {
-    id: 5,
-    name: "MP_V2（个人中后台管理系统）",
-    imageUrl:
-      "https://panshi-on.oss-cn-hangzhou.aliyuncs.com/yunxiaoding-mini/other/common/EFANMBKF-1711591497556Pasted Graphic 6.png",
-    status: "基于AntDesign_Pro的个人管理系统，包含有todoList等多种功能",
-    tech: "React, AntDesign_Pro",
-    github: "https://github.com/SSDWGG/MP_V2",
-    demo: "http://todo.ssdwgg.cn",
-  },
-  {
-    id: 3,
-    name: "QKun",
-    imageUrl:
-      "https://panshi-on.oss-cn-hangzhou.aliyuncs.com/yunxiaoding-mini/other/common/JKLACABO-1711591320010Pasted Graphic 5.png",
-    status: "基于Sakana物理引擎的Q坤坤",
-    tech: "React, Sakana",
-    github: "null",
-    demo: "http://ikunqqq.ssdwgg.cn",
-  },
-  {
-    id: 10,
-    name: "双人视频",
-    imageUrl:
-      "https://panshi-on.oss-cn-hangzhou.aliyuncs.com/yunxiaoding-mini/other/common/GJGIMFCL-1711595191478Pasted Graphic 12.png",
-    status: "基于流媒体技术的双人视频通话验证型项目",
-    tech: "MRTK",
-    github: "null",
-    demo: "https://ssdwgg.cn:8693",
-  },
-  {
-    id: 8,
-    name: "兔子商城",
-    imageUrl:
-      "https://panshi-on.oss-cn-hangzhou.aliyuncs.com/yunxiaoding-mini/other/common/NAICMCGG-1711594579198Pasted Graphic 7.png",
-    status:
-      "基于vue和springboot的前后端分离电商平台型项目，包含从原型设计到验收文档的全套开源代码",
-    tech: "Vue2Js, Springboot",
-    github: "https://github.com/SSDWGG/rabbitMall",
-    demo: "http://mall.ssdwgg.cn",
-  },
-  {
-    id: 4,
-    name: "WGGweb",
-    imageUrl:
-      "https://panshi-on.oss-cn-hangzhou.aliyuncs.com/yunxiaoding-mini/other/common/FBPKKKPM-1711591208241Pasted Graphic 4.png",
-    status: "色彩鲜明的WGG个人项目合集",
-    tech: "Vue3Js",
-    github: "https://github.com/SSDWGG/WGGweb",
-    demo: "http://wgg.ssdwgg.cn",
-  },
-  {
-    id: 2,
-    name: "Github",
-    imageUrl:
-      "https://panshi-on.oss-cn-hangzhou.aliyuncs.com/yunxiaoding-mini/other/common/KDLHCKEC-1711590640895Pasted Graphic 2.png",
-    status: "Github主页运营和搭建",
-    tech: "Html, Github",
-    github: "https://github.com/SSDWGG",
-    demo: "https://github.com/SSDWGG",
-  },
-
-  {
-    id: 7,
-    name: "诗文集卡片",
-    imageUrl:
-      "https://panshi-on.oss-cn-hangzhou.aliyuncs.com/yunxiaoding-mini/other/common/JOGBICGP-1711592412213Pasted Graphic 10.png",
-    status: "流动的色彩鲜明的背景上收集着一些摘选诗文",
-    tech: "Vue",
-    github: "null",
-    demo: "http://poem.ssdwgg.cn",
-  },
-  {
-    id: 6,
-    name: "兔了个兔",
-    imageUrl:
-      "https://panshi-on.oss-cn-hangzhou.aliyuncs.com/yunxiaoding-mini/other/common/DHMLMDEP-1711592127292Pasted Graphic 9.png",
-    status: "爆火的小游戏兔了个兔",
-    tech: "Vue3Js",
-    github: "null",
-    demo: "http://xlgx.ssdwgg.cn",
-  },
-  {
-    id: 11,
-    name: "人参果微信小程序",
-    imageUrl:
-      "https://panshi-on.oss-cn-hangzhou.aliyuncs.com/yunxiaoding-mini/other/common/JNKNICGF-1711595815871WechatIMG109.jpg",
-    status:
-      "基于Taro多端框架的个人微信小程序，内含有多种技术功能。欢迎微信搜索体验！",
-    tech: "Taro, Vue3Js, OSS...",
-    github: "null",
-    demo: "null",
-  },
 ]);
 const jump = (demo: string) => {
-  router.push(demo);
+  const routeUrl = router.resolve({
+    path: demo,
+  });
+  window.open(routeUrl.href, "_blank");
 };
 </script>
 <style scoped>
